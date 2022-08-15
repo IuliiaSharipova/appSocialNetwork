@@ -18,8 +18,7 @@ const MyPosts = () => {
                 </div>
             </div>
             <div className={style.posts}>
-                <Post message={postsData[0].message} likesCount={postsData[0].likesCount}/>
-                <Post message={postsData[1].message} likesCount={postsData[1].likesCount}/>
+                {postsData.map(post => <Post message={post.message} likesCount={post.likesCount}/>)}
             </div>
         </div>
     );
