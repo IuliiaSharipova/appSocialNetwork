@@ -1,7 +1,8 @@
 import React from 'react';
 import style from './Post.module.css';
 
-type PostPropsType = {
+export type PostPropsType = {
+    id:string
     message: string
     likesCount: number
 }
@@ -9,7 +10,7 @@ type PostPropsType = {
 export const Post = (props: PostPropsType) => {
     return (
         <div className={style.item}>
-            <img src="https://static.independent.co.uk/2022/03/17/10/newFile.jpg?width=1200" alt="avatarka"/>
+            <img src="https://klike.net/uploads/posts/2019-03/1551511784_4.jpg" alt="ava"/>
             {props.message}
             <div>
                 like
