@@ -7,7 +7,7 @@ import {BrowserRouter} from 'react-router-dom';
 
 ReactDOM.render(
     <BrowserRouter>
-    <App dialogsPage={state.dialogsPage} profilePage={state.profilePage}/>
+    <App state={state}/>
     </BrowserRouter>,
   document.getElementById('root')
 

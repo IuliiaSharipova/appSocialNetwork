@@ -2,14 +2,18 @@ import React from 'react';
 import style from './Profile.module.css';
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-import {ProfilePageType} from '../../redux/state';
+import {addPostMessage, PostType, ProfilePageType} from '../../redux/state';
 
+type ProfilePropsType = {
+    postsData: Array<PostType>
+    addPostCallback: (newPostText: string) => void
+}
 
-const Profile = (props: ProfilePageType) => {
+const Profile = (props: ProfilePropsType) => {
     return (
         <div className={style.content}>
             <ProfileInfo/>
-            <MyPosts postsData={props.postsData}/>
+            <MyPosts addPostCallback={addPostMessage} postsData={props.postsData}/>
         </div>
     );
 };

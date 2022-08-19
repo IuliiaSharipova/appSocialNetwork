@@ -21,15 +21,15 @@ export type DialogsPageType = {
 
 export type ProfilePageType = {
     postsData: Array<PostType>
-
+    //addPostCallback: (newPostText: string) => void
 }
 
 export type StateType = {
-    profilePage:ProfilePageType
-    dialogsPage:DialogsPageType
+    profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
 }
 
-export const state:StateType = {
+export const state: StateType = {
     profilePage: {
         postsData: [
             {id: '1', message: 'It is my first message', likesCount: 10},
@@ -48,4 +48,14 @@ export const state:StateType = {
             {id: '3', text: 'How are you?'}
         ]
     }
+};
+
+export const addPostMessage = (newPostText: string) => {
+    debugger
+    const newPost: PostType = {
+        id: '3',
+        message: newPostText,
+        likesCount: 0
+    };
+    state.profilePage.postsData.push(newPost);
 };

@@ -1,17 +1,21 @@
 import React, {useRef} from 'react';
 import style from './MyPosts.module.css';
 import Post from './Post/Post';
-import {ProfilePageType} from '../../../redux/state';
+import {PostType, ProfilePageType} from '../../../redux/state';
 
+type MyPostsPropsType = {
+    addPostCallback: (newPostText: string) => void
+    postsData: Array<PostType>
+}
 
-const MyPosts = (props: ProfilePageType) => {
+const MyPosts = (props: MyPostsPropsType) => {
 
     const newPostElement = useRef<HTMLTextAreaElement>(null);
 
     function addPost() {
         if(newPostElement.current){
             const text = newPostElement.current.value;
-            alert(text);
+            props.addPostCallback(text)
         }
     }
 
