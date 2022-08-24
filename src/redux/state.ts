@@ -1,3 +1,5 @@
+import {rerenderEntireTree} from '../rerender';
+
 export type PostType = {
     id: string
     message: string
@@ -58,4 +60,5 @@ export const addPostMessage = (newPostText: string) => {
         likesCount: 0
     };
     state.profilePage.postsData.push(newPost);
+    rerenderEntireTree(state)
 };
