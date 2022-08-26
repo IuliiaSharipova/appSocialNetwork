@@ -1,6 +1,18 @@
 import React from 'react';
 import './index.css';
-import {rerenderEntireTree} from './rerender';
-import {state} from './redux/state';
+import {addPostMessage, state, StateType, updateNewPostText} from './redux/state';
+import ReactDOM from 'react-dom';
+import {BrowserRouter} from 'react-router-dom';
+import App from './App';
+import {subscribe} from './redux/state';
 
-rerenderEntireTree(state)
+export const rerenderEntireTree = (state: StateType) => {
+    ReactDOM.render(
+        <BrowserRouter>
+            <App state={state} addPostCallback={addPostMessage} updateNewPostText={updateNewPostText}/>
+        </BrowserRouter>,
+        document.getElementById('root')
+    );
+};
+rerenderEntireTree(state);
+subscribe(rerenderEntireTree);
