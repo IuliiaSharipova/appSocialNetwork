@@ -1,4 +1,13 @@
-export const store = {
+type StoreType = {
+    _state: StateType
+    getState: () => StateType
+    _callSubscriber: (state: StateType) => void
+    addPostMessage: () => void
+    updateNewPostText: (newPostText: string) => void
+    subscribe: (observer: (state: StateType) => void) => void
+}
+
+export const store: StoreType = {
     _state: {
         profilePage: {
             postsData: [
@@ -26,8 +35,8 @@ export const store = {
     _callSubscriber(state: StateType) {
         console.log('rerender state');
     },
-    addPostMessage () {
-        const newPost= {
+    addPostMessage() {
+        const newPost = {
             id: '3',
             message: this._state.profilePage.newPostText,
             likesCount: 0
@@ -36,12 +45,12 @@ export const store = {
         this._state.profilePage.newPostText = '';
         this._callSubscriber(this._state);
     },
-    updateNewPostText (newPostText: string)  {
+    updateNewPostText(newPostText: string) {
         this._state.profilePage.newPostText = newPostText;
         this._callSubscriber(this._state);
     },
-    subscribe  (observer: (state: StateType) => void)  {
-    this._callSubscriber = observer;
+    subscribe(observer: (state: StateType) => void) {
+        this._callSubscriber = observer;
     },
 };
 
