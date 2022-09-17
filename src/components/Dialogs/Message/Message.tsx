@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import style from './../Dialogs.module.css';
 import {MessageType} from '../../../redux/state';
 

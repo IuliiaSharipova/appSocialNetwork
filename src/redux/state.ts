@@ -1,4 +1,4 @@
-type StoreType = {
+export type StoreType = {
     _state: StateType
     getState: () => StateType
     _callSubscriber: (state: StateType) => void
@@ -7,6 +7,8 @@ type StoreType = {
 }
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const ADD_MESSAGE='ADD-MESSAGE'
+const UPDATE_NEW_MESSAGE_TEXT='UPDATE-NEW-MESSAGE-TEXT'
 
 export const store: StoreType = {
     _state: {
@@ -27,7 +29,8 @@ export const store: StoreType = {
                 {id: '1', text: 'Hi'},
                 {id: '2', text: 'Yo'},
                 {id: '3', text: 'How are you?'}
-            ]
+            ],
+            newMessageText: ''
         }
     },
     getState() {
@@ -52,11 +55,22 @@ export const store: StoreType = {
         } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newPostText;
             this._callSubscriber(this._state);
+        } else if (action.type === ADD_MESSAGE){
+            const newMessage = {
+                id: '4',
+                text: this._state.dialogsPage.newMessageText,
+            };
+            this._state.dialogsPage.messagesData.push(newMessage);
+            this._state.dialogsPage.newMessageText= '';
+            this._callSubscriber(this._state);
+        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
+            this._state.dialogsPage.newMessageText = action.newMessageText;
+            this._callSubscriber(this._state);
         }
     }
 };
 
-export type ActionsType = AddPostActionType | UpdateNewPostTextActionType
+export type ActionsType = AddPostActionType | UpdateNewPostTextActionType|AddMessageActionType |UpdateNewMessageTextActionType
 
 type AddPostActionType = ReturnType<typeof addPostAC>
 
@@ -74,6 +88,23 @@ export const updateNewPostTextAC = (newPostText: string) => {
         newPostText
     } as const;
 };
+
+type AddMessageActionType = ReturnType<typeof addMessageAC>
+
+export const addMessageAC = () => {
+    return {
+        type: ADD_MESSAGE
+    } as const;
+};
+type UpdateNewMessageTextActionType = ReturnType<typeof updateNewMessageTextAC>
+
+export const updateNewMessageTextAC = (newMessageText: string) => {
+    return {
+        type: UPDATE_NEW_MESSAGE_TEXT,
+        newMessageText
+    } as const;
+};
+
 export type PostType = {
     id: string
     message: string
@@ -93,6 +124,7 @@ export type DialogType = {
 export type DialogsPageType = {
     dialogsData: Array<DialogType>
     messagesData: Array<MessageType>
+    newMessageText:string
 }
 
 export type ProfilePageType = {
