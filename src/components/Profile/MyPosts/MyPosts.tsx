@@ -1,7 +1,8 @@
 import React, {ChangeEvent} from 'react';
 import style from './MyPosts.module.css';
 import Post from './Post/Post';
-import {ActionsType, addPostAC, PostType, updateNewPostTextAC} from '../../../redux/state';
+import {ActionsType, PostType} from '../../../redux/state';
+import {addPostAC, updateNewPostTextAC} from '../../../redux/profilePage-reducer';
 
 type MyPostsPropsType = {
     postsData: Array<PostType>
@@ -35,6 +36,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
             <div className={style.posts}>
                 {props.postsData.map(post =>
                     <Post
+                        key={post.id}
                         id={post.id}
                         message={post.message}
                         likesCount={post.likesCount}/>
