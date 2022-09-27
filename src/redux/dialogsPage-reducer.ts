@@ -3,7 +3,21 @@ import {ActionsType, DialogsPageType} from './state';
 const ADD_MESSAGE = 'ADD-MESSAGE';
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
-export const dialogsPageReducer = (state: DialogsPageType, action: ActionsType): DialogsPageType => {
+let initialState: DialogsPageType = {
+    dialogsData: [
+        {id: '1', name: 'Dima'},
+        {id: '2', name: 'Sveta'},
+        {id: '3', name: 'Ilia'}
+    ],
+    messagesData: [
+        {id: '1', text: 'Hi'},
+        {id: '2', text: 'Yo'},
+        {id: '3', text: 'How are you?'}
+    ],
+    newMessageText: ''
+};
+
+export const dialogsPageReducer = (state = initialState, action: ActionsType): DialogsPageType => {
     switch (action.type) {
         case ADD_MESSAGE:
             const newMessage = {
@@ -20,25 +34,6 @@ export const dialogsPageReducer = (state: DialogsPageType, action: ActionsType):
             return state;
     }
 };
-/*
-else
-if (action.type === ADD_MESSAGE) {
-    const newMessage = {
-        id: '4',
-        text: this._state.dialogsPage.newMessageText,
-    };
-    this._state.dialogsPage.messagesData.push(newMessage);
-    this._state.dialogsPage.newMessageText = '';
-    this._callSubscriber(this._state);
-} else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-    this._state.dialogsPage.newMessageText = action.newMessageText;
-    this._callSubscriber(this._state);
-}
-}
-}
-;
-
-*/
 
 export type AddMessageActionType = ReturnType<typeof addMessageAC>
 
