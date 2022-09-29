@@ -1,23 +1,26 @@
 import React, {ChangeEvent} from 'react';
 import style from './MyPosts.module.css';
 import Post from './Post/Post';
-import {ActionsType, PostType} from '../../../redux/state';
-import {addPostAC, updateNewPostTextAC} from '../../../redux/profilePage-reducer';
+import { PostType} from '../../../redux/state';
 
 type MyPostsPropsType = {
     postsData: Array<PostType>
     newPostText: string
-    dispatch: (action: ActionsType) => void
+    updateNewPostText:(newPostText: string) => void
+    addPostCallback: () => void
+    //dispatch: (action: ActionsType) => void
 }
 
 export const MyPosts = (props: MyPostsPropsType) => {
 
-    function addPost() {
-        props.dispatch(addPostAC());
+    function onAddPost() {
+        props.addPostCallback()
+        //props.dispatch(addPostAC());
     }
 
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewPostTextAC(e.currentTarget.value));
+        let text=e.currentTarget.value
+        props.updateNewPostText(text);
     };
 
     return (
@@ -30,7 +33,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
                         value={props.newPostText}/>
                 </div>
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={onAddPost}>Add post</button>
                 </div>
             </div>
             <div className={style.posts}>
