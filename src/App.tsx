@@ -7,16 +7,15 @@ import {Route, Routes} from 'react-router-dom';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
-import {ActionsType, StateType, StoreType} from './redux/state';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 
-type AppPropsType = {
-    state: StateType
-    store: StoreType
-    dispatch: (action: ActionsType) => void
-}
+/*type AppPropsType = {
+    //state: StateType
+    //store: StoreType
+    //dispatch: (action: ActionsType) => void
+}*/
 
-const App = (props: AppPropsType) => {
+const App = () => {
     return (
         <div className={'app-wrapper'}>
             <Header/>
@@ -25,14 +24,14 @@ const App = (props: AppPropsType) => {
                 <Routes>
                     <Route path="/dialogs/*" element={
                         <DialogsContainer
-                            store={props.store}
+                            //store={props.store}
                             //dispatch={props.dispatch}
                             //newMessageText={props.state.dialogsPage.newMessageText}
                         />
                     }/>
                     <Route path="/profile" element={
                         <Profile
-                            store={props.store}
+                            //store={props.store}
                             //postsData={props.state.profilePage.postsData}
                             //newPostText={props.state.profilePage.newPostText}
                             // dispatch={props.dispatch}
