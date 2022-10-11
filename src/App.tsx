@@ -8,12 +8,8 @@ import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
+import UsersContainer from './components/Users/UsersContainer';
 
-/*type AppPropsType = {
-    //state: StateType
-    //store: StoreType
-    //dispatch: (action: ActionsType) => void
-}*/
 
 const App = () => {
     return (
@@ -22,21 +18,9 @@ const App = () => {
             <Navbar/>
             <div className={'appWrapper-content'}>
                 <Routes>
-                    <Route path="/dialogs/*" element={
-                        <DialogsContainer
-                            //store={props.store}
-                            //dispatch={props.dispatch}
-                            //newMessageText={props.state.dialogsPage.newMessageText}
-                        />
-                    }/>
-                    <Route path="/profile" element={
-                        <Profile
-                            //store={props.store}
-                            //postsData={props.state.profilePage.postsData}
-                            //newPostText={props.state.profilePage.newPostText}
-                            // dispatch={props.dispatch}
-                        />}
-                    />
+                    <Route path="/dialogs/*" element={<DialogsContainer/>}/>
+                    <Route path="/profile" element={<Profile/>}/>
+                    <Route path="/users" element={<UsersContainer/>}/>
                     <Route path="/news" element={<News/>}/>
                     <Route path="/music" element={<Music/>}/>
                     <Route path="/settings" element={<Settings/>}/>
