@@ -24,14 +24,18 @@ export const dialogsPageReducer = (state = initialState, action: ActionsType): D
                 id: '4',
                 text: state.newMessageText,
             };
-            state.messagesData.push(newMessage);
-            state.newMessageText = '';
-            return state;
+            let stateCopy={...state}
+            stateCopy.messagesData=[...state.messagesData]
+            stateCopy.messagesData.push(newMessage);
+            stateCopy.newMessageText = '';
+            return stateCopy;
         case 'UPDATE-NEW-MESSAGE-TEXT':
-            state.newMessageText = action.newMessageText;
-            return state;
+        { let stateCopy={...state}
+            stateCopy.newMessageText = action.newMessageText;
+            return stateCopy
+        }
         default:
-            return state;
+            return {...state}
     }
 };
 
