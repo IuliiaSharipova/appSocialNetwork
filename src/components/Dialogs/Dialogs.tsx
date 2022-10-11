@@ -18,7 +18,6 @@ const Dialogs = (props: DialogsPropsType) => {
     const onMessageChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let newMessage = e.currentTarget.value;
         props.updateNewMessage(newMessage);
-        //props.dispatch(updateNewMessageTextAC(e.currentTarget.value));
     };
     return (
         <div className={style.dialogs}>
@@ -30,7 +29,7 @@ const Dialogs = (props: DialogsPropsType) => {
 
             <div className={style.messages}>
                 {state.messagesData.map(message =>
-                    <Message id={message.id} text={message.text}/>)}
+                    <Message key={message.id} id={message.id} text={message.text}/>)}
                 <div>
                     <div>
                         <textarea value={newMessageText} onChange={onMessageChangeHandler}></textarea>
