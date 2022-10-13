@@ -8,16 +8,19 @@ type initialStateType = {
 
 export type UserType = {
     id: number
-    fullName: string
-    photoUrl: string
+    name: string
+    photos: {
+        small:string
+        large:string
+    }
     status: string
-    location: UserLocationType
+    //location: UserLocationType
     followed: boolean
 }
-type UserLocationType = {
+/*type UserLocationType = {
     city: string
     country: string
-}
+}*/
 const initialState: initialStateType = {
     users: []
 };
