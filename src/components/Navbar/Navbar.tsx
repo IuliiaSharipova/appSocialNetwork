@@ -12,6 +12,9 @@ const Navbar = () => {
                 <NavLink className={navData => navData.isActive ? style.active : style.item} to="/dialogs">Messages</NavLink>
             </div>
             <div className={style.item}>
+                <NavLink className={navData => navData.isActive ? style.active : style.item} to="/users">Users</NavLink>
+            </div>
+            <div className={style.item}>
                 <NavLink className={navData => navData.isActive ? style.active : style.item} to="/news">News</NavLink>
             </div>
             <div className={style.item}>
@@ -20,7 +23,6 @@ const Navbar = () => {
             <div className={style.item}>
                 <NavLink className={navData => navData.isActive ? style.active : style.item} to="/settings">Settings</NavLink>
             </div>
-
         </nav>
     );
 };

@@ -2,56 +2,32 @@ import React from 'react';
 import {MapDispatchPropsType, MapStatePropsType} from './UsersContainer';
 import style from './Users.module.css';
 import axios from 'axios';
-import userPhoto from '../../assets/images/user.jpg'
-/*[
-    {
-        id: 1,
-        fullName: 'Milos Zeman',
-        photoUrl: 'https://www.hrad.cz/file/edee/en/president-of-the-cr/current-president-of-the-cr/curriculum-vitae/milos-zeman.jpg',
-        status: 'I am the president',
-        location: {city: 'Prague', country: 'Czech Republic'},
-        followed: false
-    },
-    {
-        id: 2,
-        fullName: 'Julia Roberts',
-        photoUrl: 'https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTgwMTM3NTQ4MjgxMDI5NzU0/gettyimages-1191495915.jpg',
-        status: 'I am an actress',
-        location: {city: 'New Mexico', country: 'USA'},
-        followed: true
-    },
-    {
-        id: 3,
-        fullName: 'Elizabeth 2',
-        photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Queen_Elizabeth_II_of_New_Zealand_%28cropped%29.jpg/800px-Queen_Elizabeth_II_of_New_Zealand_%28cropped%29.jpg',
-        status: 'I am queen',
-        location: {city: 'London', country: 'United Kingdom'},
-        followed: false
-    }
-]*/
+import userPhoto from '../../assets/images/user.jpg';
 
-type UserPropsType = MapStatePropsType & MapDispatchPropsType
+type UserClassType = MapStatePropsType & MapDispatchPropsType
 
-const User = (props: UserPropsType) => {
-    if (props.usersPage.length === 0) {
+class User extends React.Component<UserClassType> {
+    constructor(props:UserClassType) {
+        super(props);
         axios.get('https://social-network.samuraijs.com/api/1.0/users').then(res => {
-            props.setUsers(res.data.items);
-        });
-    }
-    return (
-        <div>
-            {props.usersPage.map(u =>
-                <div key={u.id}>
+            this.props.setUsers(res.data.items)})}
+
+    render() {
+        return (
+            <div>
+                {this.props.usersPage.map(u =>
+                    <div key={u.id}>
                     <span>
-                        <img className={style.avatar} src={u.photos.small!==null ? u.photos.small : userPhoto} alt="avatar"/>
+                        <img className={style.avatar} src={u.photos.small !== null ? u.photos.small : userPhoto}
+                             alt="avatar"/>
                         <div>
                             {u.followed
-                                ? <button onClick={() => props.unfollow(u.id)}>Unfollowed</button>
-                                : <button onClick={() => props.follow(u.id)}>Followed</button>
+                                ? <button onClick={() => this.props.unfollow(u.id)}>Unfollowed</button>
+                                : <button onClick={() => this.props.follow(u.id)}>Followed</button>
                             }
                         </div>
                     </span>
-                    <span>
+                        <span>
                         <span>
                             <div>{u.name}</div>
                             <div>{u.status}</div>
@@ -61,9 +37,11 @@ const User = (props: UserPropsType) => {
                             <div>{u.location.city}</div>*/}
                         </span>
                     </span>
-                </div>)}
-        </div>
-    );
+                    </div>)}
+            </div>
+        );
+    }
+
 };
 
 export default User;
