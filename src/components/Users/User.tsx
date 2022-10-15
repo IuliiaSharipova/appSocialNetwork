@@ -7,14 +7,39 @@ import userPhoto from '../../assets/images/user.jpg';
 type UserClassType = MapStatePropsType & MapDispatchPropsType
 
 class User extends React.Component<UserClassType> {
+
     componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(res => {
-            this.props.setUsers(res.data.items)})
-    }
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(res => {
+            this.props.setUsers(res.data.items);
+            this.props.setUsersTotalCount(res.data.totalCount);
+
+        });
+    };
+
+    onPageChanged = (pageNumber: number) => {
+        this.props.setCurrentPage(pageNumber, this.props.pageSize);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(res => {
+            this.props.setUsers(res.data.items);
+        });
+    };
 
     render() {
+        const pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+        let pages = [];
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i);
+        }
         return (
             <div>
+                <div>{pages.slice(0,20).map((p, index) =>
+                    <span key={index}
+                          className={this.props.currentPage === p ? style.selectedPage : ''}
+                          onClick={() => {
+                              this.onPageChanged(p);
+                          }}>
+                    {p}
+                    </span>)}
+                </div>
                 {this.props.usersPage.map(u =>
                     <div key={u.id}>
                     <span>
