@@ -62,48 +62,48 @@ type ActionsType =
     | setUsersTotalCountType
     | toggleIsFetchingAC
 
-type FollowActionType = ReturnType<typeof followAC>
+type FollowActionType = ReturnType<typeof follow>
 
-export const followAC = (userId: number) => {
+export const follow = (userId: number) => {
     return {
         type: FOLLOW,
         userId
     } as const;
 };
-type UnFollowActionType = ReturnType<typeof unfollowAC>
-export const unfollowAC = (userId: number) => {
+type UnFollowActionType = ReturnType<typeof unfollow>
+export const unfollow = (userId: number) => {
     return {
         type: UNFOLLOW,
         userId
     } as const;
 };
 
-type SetUsersActionType = ReturnType<typeof setUsersAC>
-export const setUsersAC = (users: Array<UserType>) => {
+type SetUsersActionType = ReturnType<typeof setUsers>
+export const setUsers = (users: Array<UserType>) => {
     return {
         type: SET_USERS,
         users
     } as const;
 };
 
-type setCurrentPageType = ReturnType<typeof setCurrentPageAC>
-export const setCurrentPageAC = (pageNumber: number) => {
+type setCurrentPageType = ReturnType<typeof setCurrentPage>
+export const setCurrentPage = (pageNumber: number) => {
     return {
         type: SET_CURRENT_PAGE,
         pageNumber
     } as const;
 };
 
-type setUsersTotalCountType = ReturnType<typeof setUsersTotalCountAC>
-export const setUsersTotalCountAC = (totalCount: number) => {
+type setUsersTotalCountType = ReturnType<typeof setUsersTotalCount>
+export const setUsersTotalCount = (totalCount: number) => {
     return {
         type: SET_USERS_TOTAL_COUNT,
         totalCount
     } as const;
 };
 
-type toggleIsFetchingAC = ReturnType<typeof toggleIsFetchingAC>
-export const toggleIsFetchingAC = (isFetching: boolean) => {
+type toggleIsFetchingAC = ReturnType<typeof toggleIsFetching>
+export const toggleIsFetching = (isFetching: boolean) => {
     return {
         type: TOGGLE_IS_FETCHING,
         isFetching

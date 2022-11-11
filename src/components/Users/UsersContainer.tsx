@@ -2,12 +2,12 @@ import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 import {rootStateType} from '../../redux/redux-store';
 import {
-    followAC,
-    setCurrentPageAC,
-    setUsersAC,
-    setUsersTotalCountAC,
-    toggleIsFetchingAC,
-    unfollowAC,
+    follow,
+    setCurrentPage,
+    setUsers,
+    setUsersTotalCount,
+    toggleIsFetching,
+    unfollow,
     UserType
 } from './usersPage-reducer';
 import React from 'react';
@@ -39,28 +39,6 @@ export type MapDispatchPropsType = {
     setUsersTotalCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
 }
-const mapDispatchToProps = (dispatch: Dispatch) => {
-    return {
-        follow: (userId: number) => {
-            dispatch(followAC(userId));
-        },
-        unfollow: (userId: number) => {
-            dispatch(unfollowAC(userId));
-        },
-        setUsers: (users: Array<UserType>) => {
-            dispatch(setUsersAC(users));
-        },
-        setCurrentPage: (pageNumber: number) => {
-            dispatch(setCurrentPageAC(pageNumber));
-        },
-        setUsersTotalCount: (totalCount: number) => {
-            dispatch(setUsersTotalCountAC(totalCount));
-        },
-        toggleIsFetching: (isFetching: boolean) => {
-            dispatch(toggleIsFetchingAC(isFetching));
-        }
-    };
-};
 
 type UserClassType = MapStatePropsType & MapDispatchPropsType
 
@@ -102,6 +80,6 @@ class UsersApiComponent extends React.Component<UserClassType> {
     }
 };
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersApiComponent);
+const UsersContainer = connect(mapStateToProps, {follow,unfollow,setCurrentPage,setUsers,setUsersTotalCount,toggleIsFetching})(UsersApiComponent);
 
 export default UsersContainer;
