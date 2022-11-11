@@ -3,12 +3,14 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT';
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 
 type initialStateType = {
     users: Array<UserType>
     pageSize: number,
     totalUsersCount: number,
     currentPage: number
+    isFetching: boolean
 }
 
 export type UserType = {
@@ -30,7 +32,8 @@ const initialState: initialStateType = {
     users: [],
     pageSize: 15,
     totalUsersCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 };
 
 export const usersPageReducer = (state = initialState, action: ActionsType): initialStateType => {
@@ -45,11 +48,19 @@ export const usersPageReducer = (state = initialState, action: ActionsType): ini
             return {...state, currentPage: action.pageNumber};
         case SET_USERS_TOTAL_COUNT:
             return {...state, totalUsersCount: action.totalCount};
+        case TOGGLE_IS_FETCHING:
+            return {...state, isFetching:action.isFetching};
         default:
             return {...state};
     }
 };
-type ActionsType = FollowActionType | UnFollowActionType | SetUsersActionType | setCurrentPageType|setUsersTotalCountType
+type ActionsType =
+    FollowActionType
+    | UnFollowActionType
+    | SetUsersActionType
+    | setCurrentPageType
+    | setUsersTotalCountType
+    | toggleIsFetchingAC
 
 type FollowActionType = ReturnType<typeof followAC>
 
@@ -83,10 +94,18 @@ export const setCurrentPageAC = (pageNumber: number) => {
     } as const;
 };
 
-type setUsersTotalCountType=ReturnType<typeof setUsersTotalCountAC>
+type setUsersTotalCountType = ReturnType<typeof setUsersTotalCountAC>
 export const setUsersTotalCountAC = (totalCount: number) => {
     return {
         type: SET_USERS_TOTAL_COUNT,
         totalCount
+    } as const;
+};
+
+type toggleIsFetchingAC = ReturnType<typeof toggleIsFetchingAC>
+export const toggleIsFetchingAC = (isFetching: boolean) => {
+    return {
+        type: TOGGLE_IS_FETCHING,
+        isFetching
     } as const;
 };
