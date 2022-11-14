@@ -1,5 +1,4 @@
 import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
 import {rootStateType} from '../../redux/redux-store';
 import {
     follow,

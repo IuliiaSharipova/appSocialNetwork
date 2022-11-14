@@ -1,4 +1,8 @@
-import {AddPostActionType, profilePageReducer, UpdateNewPostTextActionType} from './profilePage-reducer';
+import {
+    AddPostActionType,
+    setUserProfileActionType,
+    UpdateNewPostTextActionType,
+} from './profilePage-reducer';
 import {AddMessageActionType, dialogsPageReducer, UpdateNewMessageTextActionType} from './dialogsPage-reducer';
 
 export type ActionsType =
@@ -6,6 +10,7 @@ export type ActionsType =
     | UpdateNewPostTextActionType
     | AddMessageActionType
     | UpdateNewMessageTextActionType
+    | setUserProfileActionType
 
 export type StoreType = {
     _state: StateType
@@ -15,14 +20,14 @@ export type StoreType = {
     dispatch: (action: ActionsType) => void
 }
 
-export const store: StoreType = {
+const store: StoreType = {
     _state: {
         profilePage: {
             postsData: [
                 {id: '1', message: 'It is my first message', likesCount: 10},
                 {id: '2', message: 'What are you learning now?', likesCount: 15},
             ],
-            newPostText: ''
+            newPostText: '',
         },
         dialogsPage: {
             dialogsData: [
@@ -48,40 +53,40 @@ export const store: StoreType = {
         this._callSubscriber = observer;
     },
     dispatch(action) {
-        this._state.profilePage = profilePageReducer(this._state.profilePage, action);
+      /*  this._state.profilePage = profilePageReducer(this._state.profilePage, action)*/;
         this._state.dialogsPage = dialogsPageReducer(this._state.dialogsPage, action);
         this._callSubscriber(this._state);
     }
 };
 
-export type PostType = {
+ type PostType = {
     id: string
     message: string
     likesCount: number
 }
 
-export type MessageType = {
+ type MessageType = {
     id: string
     text: string
 };
 
-export type DialogType = {
+ type DialogType = {
     name: string
     id: string
 }
 
-export type DialogsPageType = {
+type DialogsPageType = {
     dialogsData: Array<DialogType>
     messagesData: Array<MessageType>
     newMessageText: string
 }
 
-export type ProfilePageType = {
+ type ProfilePageType = {
     postsData: Array<PostType>
     newPostText: string
 }
 
-export type StateType = {
+ type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
 }

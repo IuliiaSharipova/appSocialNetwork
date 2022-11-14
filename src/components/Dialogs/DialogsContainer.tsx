@@ -1,10 +1,23 @@
 import {addMessageAC, updateNewMessageTextAC} from '../../redux/dialogsPage-reducer';
 import Dialogs from './Dialogs';
 import {connect} from 'react-redux';
-import {DialogsPageType} from '../../redux/state';
 import {rootStateType} from '../../redux/redux-store';
 import {Dispatch} from 'redux';
 
+type MessageType = {
+    id: string
+    text: string
+};
+
+type DialogType = {
+    name: string
+    id: string
+}
+type DialogsPageType = {
+    dialogsData: Array<DialogType>
+    messagesData: Array<MessageType>
+    newMessageText: string
+}
 export type MapStatePropsType = {
     dialogsPage: DialogsPageType
 }

@@ -1,9 +1,12 @@
-import {ActionsType, DialogsPageType} from './state';
+import {ActionsType} from './state';
 
 const ADD_MESSAGE = 'ADD-MESSAGE';
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
-let initialState: DialogsPageType = {
+
+type DialogsPageType =typeof initialState
+
+let initialState = {
     dialogsData: [
         {id: '1', name: 'Dima'},
         {id: '2', name: 'Sveta'},

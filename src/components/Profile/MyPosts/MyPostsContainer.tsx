@@ -1,9 +1,14 @@
-import {PostType} from '../../../redux/state';
 import {addPostAC, updateNewPostTextAC} from '../../../redux/profilePage-reducer';
 import {MyPosts} from './MyPosts';
 import {connect} from 'react-redux';
 import {rootStateType} from '../../../redux/redux-store';
 import {Dispatch} from 'redux';
+
+type PostType = {
+    id: string
+    message: string
+    likesCount: number
+}
 
 export type MapStatePropsType = {
     postsData: Array<PostType>
