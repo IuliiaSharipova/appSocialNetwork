@@ -5,3 +5,9 @@
 .header img{
     width: 40px;
 }
+
+.authBlock{
+    float:right;
+    margin-right: 20px;
+    color: white;
+}

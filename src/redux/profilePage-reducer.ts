@@ -1,8 +1,16 @@
-import {ActionsType} from './state';
+import {AddMessageActionType, UpdateNewMessageTextActionType} from './dialogsPage-reducer';
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
+
+
+type ActionsType =
+    AddPostActionType
+    | UpdateNewPostTextActionType
+    | AddMessageActionType
+    | UpdateNewMessageTextActionType
+    | setUserProfileActionType
 
 export type UserProfileType = {
     userId: number
@@ -93,7 +101,7 @@ export const updateNewPostTextAC = (newPostText: string) => {
 };
 
 export type setUserProfileActionType = ReturnType<typeof setUserProfile>
-export const setUserProfile = (profile: any) => {
+export const setUserProfile = (profile: UserProfileType) => {
     return {
         type: SET_USER_PROFILE,
         profile

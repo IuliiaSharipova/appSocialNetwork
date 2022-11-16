@@ -5,7 +5,7 @@ import {
 } from './profilePage-reducer';
 import {AddMessageActionType, dialogsPageReducer, UpdateNewMessageTextActionType} from './dialogsPage-reducer';
 
-export type ActionsType =
+type ActionsType =
     AddPostActionType
     | UpdateNewPostTextActionType
     | AddMessageActionType

@@ -1,8 +1,14 @@
-import {ActionsType} from './state';
+import {AddPostActionType, setUserProfileActionType, UpdateNewPostTextActionType} from './profilePage-reducer';
 
 const ADD_MESSAGE = 'ADD-MESSAGE';
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
+type ActionsType =
+    AddPostActionType
+    | UpdateNewPostTextActionType
+    | AddMessageActionType
+    | UpdateNewMessageTextActionType
+    | setUserProfileActionType
 
 type DialogsPageType =typeof initialState
 

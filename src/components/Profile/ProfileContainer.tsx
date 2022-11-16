@@ -36,7 +36,7 @@ type MapDispatchPropsType = {
     setUserProfile: (profile: UserProfileType) => void
 }
 
-const mapStateToProps = (state: rootStateType) => {
+const mapStateToProps = (state: rootStateType):MapStatePropsType => {
     return {
         profile: state.profilePage.profile
     };
