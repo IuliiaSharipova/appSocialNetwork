@@ -13,6 +13,7 @@ import React from 'react';
 import axios from 'axios';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
+import {usersAPI} from '../../api/api';
 
 export type MapStatePropsType = {
     usersPage: Array<UserType>
@@ -45,15 +46,10 @@ class UsersApiComponent extends React.Component<UserClassType> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-            withCredentials:true,
-            headers:{
-                "API-KEY":'1dda7b3e-e372-45e9-b764-953ac45ae692'
-            }
-        }).then(res => {
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
             this.props.toggleIsFetching(false);
-            this.props.setUsers(res.data.items);
-            this.props.setUsersTotalCount(res.data.totalCount);
+            this.props.setUsers(data.items);
+            this.props.setUsersTotalCount(data.totalCount);
 
         });
     };
@@ -61,14 +57,9 @@ class UsersApiComponent extends React.Component<UserClassType> {
     onPageChanged = (pageNumber: number) => {
         this.props.toggleIsFetching(true);
         this.props.setCurrentPage(pageNumber, this.props.pageSize);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,{
-            withCredentials:true,
-            headers:{
-                "API-KEY":'1dda7b3e-e372-45e9-b764-953ac45ae692'
-            }
-        }).then(res => {
+        usersAPI.getUsersOfCurrentPage(pageNumber, this.props.pageSize).then(data => {
             this.props.toggleIsFetching(false);
-            this.props.setUsers(res.data.items);
+            this.props.setUsers(data.items);
         });
     };
 
@@ -89,6 +80,13 @@ class UsersApiComponent extends React.Component<UserClassType> {
     }
 };
 
-const UsersContainer = connect(mapStateToProps, {follow,unfollow,setCurrentPage,setUsers,setUsersTotalCount,toggleIsFetching})(UsersApiComponent);
+const UsersContainer = connect(mapStateToProps, {
+    follow,
+    unfollow,
+    setCurrentPage,
+    setUsers,
+    setUsersTotalCount,
+    toggleIsFetching
+})(UsersApiComponent);
 
 export default UsersContainer;
