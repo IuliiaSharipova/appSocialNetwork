@@ -25,12 +25,9 @@ type GetUsersResponseType = {
     'error': string
 }
 export const usersAPI = {
-    getUsers(currentPage = 1, pageSize = 10) {
-        return instance.get<GetUsersResponseType>(`users?page=${currentPage}&count=${pageSize}`).then(res => res.data);
+    getUsers(pageNumber = 1, pageSize = 10) {
+        return instance.get<GetUsersResponseType>(`users?page=${pageNumber}&count=${pageSize}`).then(res => res.data);
     },
-    getUsersOfCurrentPage(pageNumber: number, pageSize: number) {
-        return instance.get<GetUsersResponseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${pageSize}`).then(res => res.data);
-    }
 };
 
 type FollowUserResponseType = {
