@@ -3,11 +3,12 @@ import style from './Dialogs.module.css';
 import {Dialog} from './Dialog/Dialog';
 import {Message} from './Message/Message';
 import {MapDispatchPropsType, MapStatePropsType} from './DialogsContainer';
+import {Navigate} from 'react-router-dom';
 
 type DialogsPropsType = MapStatePropsType & MapDispatchPropsType
 
 const Dialogs = (props: DialogsPropsType) => {
-
+    if (!props.isAuth) return <Navigate to={'/login'}/>;
     let state = props.dialogsPage;
     let newMessageText = state.newMessageText;
 

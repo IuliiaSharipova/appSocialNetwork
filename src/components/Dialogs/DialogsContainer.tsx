@@ -20,10 +20,12 @@ type DialogsPageType = {
 }
 export type MapStatePropsType = {
     dialogsPage: DialogsPageType
+    isAuth:boolean
 }
 const mapStateToProps = (state: rootStateType): MapStatePropsType => {
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth
     };
 };
 
