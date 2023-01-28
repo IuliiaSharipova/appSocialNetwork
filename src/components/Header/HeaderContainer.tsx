@@ -1,9 +1,8 @@
 import React from 'react';
 import Header from './Header';
-import {AuthDataType, setAuthData} from '../../redux/auth-reducer';
+import {getAuthUserData} from '../../redux/auth-reducer';
 import {rootStateType} from '../../redux/redux-store';
 import {connect} from 'react-redux';
-import axios from 'axios';
 
 
 type HeaderContainerClassType = MapStatePropsType & MapDispatchPropsType
@@ -14,16 +13,12 @@ type MapStatePropsType = {
 }
 
 type MapDispatchPropsType = {
-    setAuthData: (data: AuthDataType) => void
+    getAuthUserData: () => void
 }
 
 class HeaderContainer extends React.Component<HeaderContainerClassType> {
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true}).then(res => {
-            if (res.data.resultCode === 0) {
-                this.props.setAuthData(res.data.data);
-            }
-        });
+        this.props.getAuthUserData();
     };
 
     render() {
@@ -37,4 +32,4 @@ const mapStateToProps = (state: rootStateType): MapStatePropsType => {
         login: state.auth.data.login
     };
 };
-export default connect(mapStateToProps, {setAuthData})(HeaderContainer);
+export default connect(mapStateToProps, {getAuthUserData})(HeaderContainer);

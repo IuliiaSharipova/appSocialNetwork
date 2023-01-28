@@ -1,4 +1,6 @@
 import {AddMessageActionType, UpdateNewMessageTextActionType} from './dialogsPage-reducer';
+import {Dispatch} from 'redux';
+import {profileAPI} from '../api/api';
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -106,4 +108,12 @@ export const setUserProfile = (profile: UserProfileType) => {
         type: SET_USER_PROFILE,
         profile
     } as const;
+};
+
+export const getUserProfile = (userId: number) => {
+    return (dispatch: Dispatch) => {
+        profileAPI.getProfile(userId).then(data => {
+            dispatch(setUserProfile(data));
+        });
+    };
 };

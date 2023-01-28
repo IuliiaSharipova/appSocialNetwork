@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {UserProfileType} from '../redux/profilePage-reducer';
 
 const instance = axios.create({
     baseURL: `https://social-network.samuraijs.com/api/1.0/`,
@@ -28,10 +29,17 @@ export const usersAPI = {
     getUsers(pageNumber = 1, pageSize = 10) {
         return instance.get<GetUsersResponseType>(`users?page=${pageNumber}&count=${pageSize}`).then(res => res.data);
     },
+    authMe() {
+        return instance.get<AuthFollowResponseType<AuthDataType>>(`auth/me`).then(res => res.data);
+    }
 };
-
-type FollowUserResponseType = {
-    'data': {}
+type AuthDataType = {
+    'id': number
+    'login': string
+    'email': string
+}
+type AuthFollowResponseType<D = {}> = {
+    'data': D
     'messages': Array<string>
     'fieldsErrors': Array<string>
     'resultCode': number
@@ -39,9 +47,15 @@ type FollowUserResponseType = {
 
 export const followAPI = {
     follow(userId: number) {
-        return instance.post<FollowUserResponseType>(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {}).then((res) => res.data);
+        return instance.post<AuthFollowResponseType>(`follow/${userId}`, {}).then((res) => res.data);
     },
-    unfollow(userId: number){
-        return instance.delete<FollowUserResponseType>(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`).then((res) => res.data);
+    unfollow(userId: number) {
+        return instance.delete<AuthFollowResponseType>(`follow/${userId}`).then((res) => res.data);
+    }
+};
+
+export const profileAPI = {
+    getProfile(userId: number) {
+        return instance.get<UserProfileType>(`profile/${userId}`).then(res => res.data);
     }
 };
