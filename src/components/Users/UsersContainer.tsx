@@ -11,6 +11,7 @@ import {
 import React from 'react';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
+import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
 
 export type MapStatePropsType = {
     usersPage: Array<UserType>
@@ -68,11 +69,11 @@ class UsersApiComponent extends React.Component<UserClassType> {
     }
 };
 
-const UsersContainer = connect(mapStateToProps, {
+const UsersContainer = WithAuthRedirect(connect(mapStateToProps, {
     setCurrentPage,
     getUsers,
     unfollow,
     follow
-})(UsersApiComponent);
+})(UsersApiComponent));
 
 export default UsersContainer;
