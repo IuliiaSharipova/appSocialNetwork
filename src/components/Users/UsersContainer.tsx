@@ -8,10 +8,11 @@ import {
     unfollow,
     UserType
 } from './usersPage-reducer';
-import React from 'react';
+import React, {ComponentType} from 'react';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
 import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
+import {compose} from 'redux';
 
 export type MapStatePropsType = {
     usersPage: Array<UserType>
@@ -63,17 +64,17 @@ class UsersApiComponent extends React.Component<UserClassType> {
                        unfollow={this.props.unfollow}
                        follow={this.props.follow}
                        followingInProgress={this.props.followingInProgress}
-                       />
+                />
             </>
         );
     }
 };
 
-const UsersContainer = WithAuthRedirect(connect(mapStateToProps, {
-    setCurrentPage,
-    getUsers,
-    unfollow,
-    follow
-})(UsersApiComponent));
 
-export default UsersContainer;
+export default compose<ComponentType>(connect(mapStateToProps, {
+        setCurrentPage,
+        getUsers,
+        unfollow,
+        follow
+    }),
+    WithAuthRedirect)(UsersApiComponent);
